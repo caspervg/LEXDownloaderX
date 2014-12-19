@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2013 Casper Van Gheluwe
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<?scenebuilder-classpath-element ../../../../../out/artifacts/LEXDownloaderX/LEXDownloaderX.jar?>
+<?scenebuilder-classpath-element ../../../../lib/LEX4J.jar?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import lexdownloaderx.element.*?>
+<?import lexdownloaderx.LEXDownloaderModel?>
+<AnchorPane prefHeight="325.0" prefWidth="650.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="net.caspervg.lexdownloaderx.Controller">
+  <fx:define>
+    <LEXDownloaderModel fx:id="model" />
+  </fx:define>
+  <children>
+    <LEXDownloadListTableView model="$model" layoutX="190.0" layoutY="0.0" prefHeight="300.0" prefWidth="460.0">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="200.0" text="Name" fx:id="nameColumn" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="140.0" text="Author" fx:id="authorColumn" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="75.0" text="Version" fx:id="versionColumn" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="44.0" resizable="true" sortable="true" text="DL" fx:id="checkColumn" />
+      </columns>
+    </LEXDownloadListTableView>
+    <VBox layoutX="0.0" layoutY="0.0" prefHeight="325.0" prefWidth="190.0">
+      <children>
+        <ToolBar minHeight="26.0" orientation="HORIZONTAL" prefHeight="26.0" prefWidth="150.0">
+          <items>
+            <Label alignment="CENTER" cache="false" contentDisplay="CENTER" prefWidth="125.0" text="LEX Downloader X" textAlignment="LEFT" translateX="25.0">
+              <font>
+                <Font name="System Bold" size="12.0" fx:id="x2" />
+              </font>
+            </Label>
+          </items>
+          <VBox.margin>
+            <Insets />
+          </VBox.margin>
+        </ToolBar>
+        <VBox prefHeight="288.0" prefWidth="180.0">
+          <children>
+            <LEXUsernameField fx:id="i_username" model="$model" prefWidth="200.0" promptText="Username" />
+            <LEXPasswordField fx:id="i_password" model="$model" prefWidth="200.0" promptText="Password" />
+            <LEXLoginButton fx:id="b_login" mnemonicParsing="false" model="$model" prefWidth="180.0" text="Log in">
+              <VBox.margin>
+                <Insets top="5.0" fx:id="x1" />
+              </VBox.margin>
+            </LEXLoginButton>
+            <Separator prefWidth="200.0" VBox.margin="$x1" />
+            <Label font="$x2" text="Download directory:" textAlignment="LEFT" wrapText="false">
+              <VBox.margin>
+                <Insets bottom="2.0" />
+              </VBox.margin>
+            </Label>
+            <HBox prefHeight="26.0" prefWidth="140.0">
+              <children>
+                <LEXDirectoryField fx:id="i_dldir" model="$model" prefWidth="155.0" />
+                <LEXDirectoryPicker fx:id="b_dldir" mnemonicParsing="false" model="$model" text="..." />
+              </children>
+            </HBox>
+            <Separator prefWidth="200.0">
+              <VBox.margin>
+                <Insets bottom="5.0" top="5.0" />
+              </VBox.margin>
+            </Separator>
+            <LEXDownloadButton disable="true" downloadAll="true" mnemonicParsing="false" model="$model" prefWidth="180.0" text="Download everything">
+              <model>
+                <LEXDownloaderModel />
+              </model>
+            </LEXDownloadButton>
+            <LEXDownloadButton disable="true" downloadAll="false" mnemonicParsing="false" model="$model" prefWidth="180.0" text="Download checked">
+              <VBox.margin>
+                <Insets bottom="5.0" top="5.0" />
+              </VBox.margin>
+            </LEXDownloadButton>
+            <BorderPane prefHeight="101.0" prefWidth="180.0">
+              <center>
+                <LEXProgressIndicator fx:id="o_progress" maxHeight="110.0" maxWidth="80.0" minHeight="80.0" minWidth="80.0" model="$model" prefHeight="101.0" prefWidth="80.0" progress="0.0" />
+              </center>
+            </BorderPane>
+          </children>
+          <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          </VBox.margin>
+        </VBox>
+      </children>
+    </VBox>
+    <LEXAttentionLabel alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="303.0" model="$model" prefWidth="460.0" text="Welcome to the SC4D LEX Downloader X." textAlignment="CENTER" />
+  </children>
+  <padding>
+    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+  </padding>
+</AnchorPane>
