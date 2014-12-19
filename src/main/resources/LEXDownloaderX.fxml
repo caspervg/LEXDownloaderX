@@ -33,7 +33,7 @@
 <?import javafx.scene.text.Font?>
 <?import lexdownloaderx.element.*?>
 <?import lexdownloaderx.LEXDownloaderModel?>
-<AnchorPane prefHeight="325.0" prefWidth="650.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="net.caspervg.lexdownloaderx.Controller">
+<AnchorPane prefHeight="325.0" prefWidth="650.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="lexdownloaderx.Controller">
   <fx:define>
     <LEXDownloaderModel fx:id="model" />
   </fx:define>
