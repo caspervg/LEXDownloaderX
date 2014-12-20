@@ -24,13 +24,15 @@
 
 package lexdownloaderx;
 
-import lexdownloaderx.core.Model;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import lexdownloaderx.bean.DownloadListInfo;
+import lexdownloaderx.core.Model;
 import net.caspervg.lex4j.bean.DownloadListItem;
 import net.caspervg.lex4j.bean.User;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,6 +45,7 @@ public class LEXDownloaderModel extends Model {
     private User user;
     private double progress;
     private List<DownloadListItem> downloadList;
+    private List<DownloadListInfo> cleanitolList;
     private File directory;
     private Paint attentionColor;
     private String attentionText;
@@ -50,6 +53,7 @@ public class LEXDownloaderModel extends Model {
     public LEXDownloaderModel() {
         attentionColor = Color.BLACK;
         attentionText = "Welcome to the SC4D LEX Downloader X.";
+        cleanitolList = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -119,6 +123,15 @@ public class LEXDownloaderModel extends Model {
 
     public void setAttentionText(String attentionText) {
         this.attentionText = attentionText;
+        fireInvalidationEvent();
+    }
+
+    public List<DownloadListInfo> getCleanitolList() {
+        return cleanitolList;
+    }
+
+    public void setCleanitolList(List<DownloadListInfo> cleanitolList) {
+        this.cleanitolList = cleanitolList;
         fireInvalidationEvent();
     }
 }

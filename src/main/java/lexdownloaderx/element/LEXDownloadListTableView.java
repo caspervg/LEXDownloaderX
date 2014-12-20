@@ -8,6 +8,7 @@ import javafx.scene.control.TableView;
 import lexdownloaderx.Controller;
 import lexdownloaderx.LEXDownloaderModel;
 import lexdownloaderx.bean.DownloadListInfo;
+import lexdownloaderx.bean.LEXDownloadListInfo;
 import net.caspervg.lex4j.bean.DownloadListItem;
 
 /**
@@ -31,7 +32,10 @@ public class LEXDownloadListTableView extends TableView<DownloadListInfo> implem
             for (DownloadListItem item : model.getDownloadList()) {
                 DownloadListItem.DownloadListItemLot lot = item.getLot();
 
-                DownloadListInfo info = new DownloadListInfo(lot.getId(), lot.getName(), lot.getAuthor(), lot.getVersion(), lot.getUpdated());
+                LEXDownloadListInfo info = new LEXDownloadListInfo(lot.getId(), lot.getName(), lot.getAuthor(), lot.getVersion(), lot.getUpdated());
+                list.add(info);
+            }
+            for (DownloadListInfo info : model.getCleanitolList()) {
                 list.add(info);
             }
         }

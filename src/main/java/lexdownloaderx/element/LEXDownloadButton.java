@@ -31,11 +31,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
-import net.caspervg.lex4j.auth.Auth;
 import lexdownloaderx.Controller;
 import lexdownloaderx.LEXDownloaderModel;
 import lexdownloaderx.bean.DownloadListInfo;
 import lexdownloaderx.service.LotDownloadService;
+import net.caspervg.lex4j.auth.Auth;
 
 import java.io.File;
 import java.util.List;

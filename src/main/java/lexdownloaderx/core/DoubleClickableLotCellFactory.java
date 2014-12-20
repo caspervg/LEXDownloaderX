@@ -1,19 +1,11 @@
 package lexdownloaderx.core;
 
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import net.caspervg.lex4j.bean.Lot;
 import lexdownloaderx.bean.DownloadListInfo;
-import lexdownloaderx.service.LotService;
 
 /**
  * JavaFX TableCell that has a doubleclick action attached to it
@@ -32,28 +24,7 @@ public class DoubleClickableLotCellFactory<S, T> extends TableCellFactory<S, T> 
         @Override
         public void handle(MouseEvent t) {
             if (t.getClickCount() > 1) {
-                int lotId = ((DownloadListInfo) (((DoubleClickableTableCell) t.getSource()).getTableRow().getItem())).getId();
-
-                LotService service = new LotService();
-                service.setId(lotId);
-                service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                    @Override
-                    public void handle(WorkerStateEvent event) {
-                        final Lot lot = (Lot) event.getSource().getValue();
-                        openLotInfo(lot);
-                    }
-
-                    private void openLotInfo(Lot lot) {
-                        String url = "http://sc4devotion.com/csxlex/" + lot.getImages().get("primary");
-                        Stage stage = new Stage();
-                        stage.setScene(new Scene(new Group(new ImageView(new Image(url)))));
-                        stage.sizeToScene();
-                        stage.setTitle(lot.getName());
-                        stage.show();
-                    }
-                });
-                service.start();
-
+                ((DownloadListInfo) (((DoubleClickableTableCell) t.getSource()).getTableRow().getItem())).onDoubleClick();
             }
         }
     }
