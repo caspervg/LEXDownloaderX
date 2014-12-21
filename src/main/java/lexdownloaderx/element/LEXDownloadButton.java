@@ -65,7 +65,6 @@ public class LEXDownloadButton extends Button implements EventHandler<ActionEven
         model.setAttentionText("Downloading the files you requested..");
 
         for (DownloadListInfo dlItem : dlList) {
-            System.out.println(dlItem.getName() + " " + dlItem.checkProperty().get());
             if ((downloadAll && dlItem.getId() > 0) || dlItem.getCheck()) {
                 count[1]++;
             }

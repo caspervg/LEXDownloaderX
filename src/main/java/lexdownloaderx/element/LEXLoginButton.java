@@ -89,7 +89,8 @@ public class LEXLoginButton extends Button implements EventHandler<ActionEvent> 
         userLoginService.setOnFailed(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent t) {
-                System.out.println("Wrong credentials!");
+                model.setAttentionColor(Color.RED);
+                model.setAttentionText("Sorry, your username or password was incorrect. Please try again!");
                 model.setProgress(0);
             }
         });
