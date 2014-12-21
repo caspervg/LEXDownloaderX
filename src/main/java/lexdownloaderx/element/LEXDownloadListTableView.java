@@ -5,7 +5,6 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
-import lexdownloaderx.Controller;
 import lexdownloaderx.LEXDownloaderModel;
 import lexdownloaderx.bean.DownloadListInfo;
 import lexdownloaderx.bean.LEXDownloadListInfo;
@@ -22,12 +21,15 @@ public class LEXDownloadListTableView extends TableView<DownloadListInfo> implem
     public LEXDownloadListTableView() {
         super();
         this.setItems(list);
-        Controller.tableModel = list;
     }
 
     @Override
     public void invalidated(Observable observable) {
         if (model.getDownloadList() != null) {
+            if (model.getDownloadList().size() + model.getCleanitolList().size() == list.size()) {
+                return;
+            }
+
             list.clear();
             for (DownloadListItem item : model.getDownloadList()) {
                 DownloadListItem.DownloadListItemLot lot = item.getLot();

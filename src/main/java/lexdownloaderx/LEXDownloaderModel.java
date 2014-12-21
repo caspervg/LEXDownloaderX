@@ -32,8 +32,8 @@ import net.caspervg.lex4j.bean.DownloadListItem;
 import net.caspervg.lex4j.bean.User;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Model for the LEX Downloader X
@@ -44,8 +44,8 @@ public class LEXDownloaderModel extends Model {
     private String password;
     private User user;
     private double progress;
-    private List<DownloadListItem> downloadList;
-    private List<DownloadListInfo> cleanitolList;
+    private Set<DownloadListItem> downloadList;
+    private Set<DownloadListInfo> cleanitolList;
     private File directory;
     private Paint attentionColor;
     private String attentionText;
@@ -53,7 +53,7 @@ public class LEXDownloaderModel extends Model {
     public LEXDownloaderModel() {
         attentionColor = Color.BLACK;
         attentionText = "Welcome to the SC4D LEX Downloader X.";
-        cleanitolList = new ArrayList<>();
+        cleanitolList = new HashSet<>();
     }
 
     public String getUsername() {
@@ -81,11 +81,11 @@ public class LEXDownloaderModel extends Model {
         fireInvalidationEvent();
     }
 
-    public List<DownloadListItem> getDownloadList() {
+    public Set<DownloadListItem> getDownloadList() {
         return downloadList;
     }
 
-    public void setDownloadList(List<DownloadListItem> downloadList) {
+    public void setDownloadList(Set<DownloadListItem> downloadList) {
         this.downloadList = downloadList;
 
         fireInvalidationEvent();
@@ -126,11 +126,11 @@ public class LEXDownloaderModel extends Model {
         fireInvalidationEvent();
     }
 
-    public List<DownloadListInfo> getCleanitolList() {
+    public Set<DownloadListInfo> getCleanitolList() {
         return cleanitolList;
     }
 
-    public void setCleanitolList(List<DownloadListInfo> cleanitolList) {
+    public void setCleanitolList(Set<DownloadListInfo> cleanitolList) {
         this.cleanitolList = cleanitolList;
         fireInvalidationEvent();
     }

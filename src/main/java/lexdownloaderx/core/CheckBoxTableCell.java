@@ -39,6 +39,7 @@ public class CheckBoxTableCell<S, T> extends TableCell<S, T> {
 
     private final CheckBox checkBox;
     private ObservableValue<T> ov;
+    private S ses;
 
     public CheckBoxTableCell() {
         this.checkBox = new CheckBox();

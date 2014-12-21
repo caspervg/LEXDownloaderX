@@ -24,20 +24,23 @@
 
 package lexdownloaderx;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import lexdownloaderx.bean.DownloadListInfo;
-import lexdownloaderx.core.CheckBoxTableCellFactory;
 import lexdownloaderx.core.DoubleClickableLotCellFactory;
 
 public class Controller {
 
     @FXML
-    private TableView<DownloadListInfo> tableView;
+    public static TableView<DownloadListInfo> tableView;
     @FXML
     private TableColumn<DownloadListInfo, String> nameColumn;
     @FXML
@@ -47,16 +50,46 @@ public class Controller {
     @FXML
     private TableColumn<DownloadListInfo, Boolean> checkColumn;
 
-    public static ObservableList<DownloadListInfo> tableModel = FXCollections.observableArrayList();
-
-
     public void initialize() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<DownloadListInfo, String>("name"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<DownloadListInfo, String>("author"));
         versionColumn.setCellValueFactory(new PropertyValueFactory<DownloadListInfo, String>("version"));
         checkColumn.setCellValueFactory(new PropertyValueFactory<DownloadListInfo, Boolean>("check"));
 
-        checkColumn.setCellFactory(new CheckBoxTableCellFactory<DownloadListInfo, Boolean>());
+        checkColumn.setCellFactory(new Callback<TableColumn<DownloadListInfo, Boolean>, TableCell<DownloadListInfo, Boolean>>() {
+            @Override
+            public TableCell<DownloadListInfo, Boolean> call(TableColumn<DownloadListInfo, Boolean> downloadListInfoBooleanTableColumn) {
+                final TableCell<DownloadListInfo, Boolean> cell = new TableCell<DownloadListInfo, Boolean>() {
+                    @Override
+                    public void updateItem(final Boolean item, boolean empty) {
+                        if (item == null) return;
+
+                        super.updateItem(item, empty);
+                        if (! isEmpty()) {
+                            final DownloadListInfo info = getTableView().getItems().get(getIndex());
+                            CheckBox checkBox = new CheckBox();
+                            if (info.getId() > 0) {
+                                checkBox.selectedProperty().bindBidirectional(info.checkProperty());
+                                checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                                    @Override
+                                    public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                                        info.checkProperty().setValue(newVal);
+                                    }
+                                });
+                                setDisable(false);
+                            } else {
+                                setDisable(true);
+                            }
+                            setGraphic(checkBox);
+                        }
+                    }
+                };
+                cell.setAlignment(Pos.CENTER);
+                return cell;
+            }
+        });
         nameColumn.setCellFactory(new DoubleClickableLotCellFactory<DownloadListInfo, String>());
+
+
     }
 }

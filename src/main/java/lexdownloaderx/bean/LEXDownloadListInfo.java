@@ -54,7 +54,7 @@ public class LEXDownloadListInfo implements DownloadListInfo {
         this.id = i;
         this.name = n;
         this.author = a;
-        this.check = new SimpleBooleanProperty(true);
+        this.check = new SimpleBooleanProperty(false);
         this.version = "v. " + v;
         this.updated = u;
     }
@@ -123,7 +123,7 @@ public class LEXDownloadListInfo implements DownloadListInfo {
             }
 
             private void openLotInfo(Lot lot) {
-                String url = "http://sc4devotion.com/csxlex/" + lot.getImages().get("primary");
+                String url = lot.getImages().get("primary").replace(" ", "%20");
                 Stage stage = new Stage();
                 stage.setScene(new Scene(new Group(new ImageView(new Image(url)))));
                 stage.sizeToScene();
@@ -132,5 +132,31 @@ public class LEXDownloadListInfo implements DownloadListInfo {
             }
         });
         service.start();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LEXDownloadListInfo that = (LEXDownloadListInfo) o;
+
+        if (id != that.id) return false;
+        if (author != null ? !author.equals(that.author) : that.author != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (updated != null ? !updated.equals(that.updated) : that.updated != null) return false;
+        if (version != null ? !version.equals(that.version) : that.version != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + id;
+        result = 31 * result + (version != null ? version.hashCode() : 0);
+        result = 31 * result + (updated != null ? updated.hashCode() : 0);
+        return result;
     }
 }

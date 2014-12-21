@@ -57,7 +57,7 @@ public class LEXDownloadButton extends Button implements EventHandler<ActionEven
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        final List<DownloadListInfo> dlList = Controller.tableModel;
+        final List<DownloadListInfo> dlList = Controller.tableView.getItems();
         final double[] count = {0,0};
         File dir = model.getDirectory();
         model.setProgress(-1);
@@ -65,13 +65,21 @@ public class LEXDownloadButton extends Button implements EventHandler<ActionEven
         model.setAttentionText("Downloading the files you requested..");
 
         for (DownloadListInfo dlItem : dlList) {
-            if (downloadAll || dlItem.getCheck()) {
+            System.out.println(dlItem.getName() + " " + dlItem.checkProperty().get());
+            if ((downloadAll && dlItem.getId() > 0) || dlItem.getCheck()) {
                 count[1]++;
             }
         }
 
+        if (count[1] <= 0) {
+            model.setProgress(1);
+            model.setAttentionColor(Color.ORANGE);
+            model.setAttentionText("There are no files to download..");
+            return;
+        }
+
         for (final DownloadListInfo dlItem : dlList) {
-            if (downloadAll || dlItem.getCheck()) {
+            if ((downloadAll && dlItem.getId() > 0) || dlItem.getCheck()) {
                 LotDownloadService service = new LotDownloadService();
                 service.setAuth(new Auth(model.getUsername(), model.getPassword()));
                 service.setId(dlItem.getId());
@@ -83,7 +91,9 @@ public class LEXDownloadButton extends Button implements EventHandler<ActionEven
                         count[0]++;
                         model.setProgress(count[0]/count[1]);
                         model.setAttentionColor(Color.GREEN);
-                        model.setAttentionText(dlItem.getName() + " has been downloaded succesfully..");
+                        model.setAttentionText(dlItem.getName() + " has been downloaded successfully..");
+                        model.getCleanitolList().remove(dlItem);
+                        model.getDownloadList().remove(dlItem);
                         dlList.remove(dlItem);
                     }
                 });

@@ -36,6 +36,7 @@ import lexdownloaderx.LEXDownloaderModel;
 import lexdownloaderx.service.DownloadListService;
 import lexdownloaderx.service.UserLoginService;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -68,7 +69,7 @@ public class LEXLoginButton extends Button implements EventHandler<ActionEvent> 
                     @Override
                     public void handle(WorkerStateEvent t) {
                         List<DownloadListItem> list = (List<DownloadListItem>) t.getSource().getValue();
-                        model.setDownloadList(list);
+                        model.setDownloadList(new HashSet<>(list));
                         model.setProgress(1.0);
                         model.setAttentionColor(Color.GREEN);
                         if (list.size() < 1) {
