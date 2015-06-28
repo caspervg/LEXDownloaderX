@@ -85,27 +85,21 @@ public class LEXDownloadButton extends Button implements EventHandler<ActionEven
                 service.setId(dlItem.getId());
                 service.setDirectory(dir);
 
-                service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                    @Override
-                    public void handle(WorkerStateEvent workerStateEvent) {
-                        count[0]++;
-                        model.setProgress(count[0]/count[1]);
-                        model.setAttentionColor(Color.GREEN);
-                        model.setAttentionText(dlItem.getName() + " has been downloaded successfully..");
-                        model.getCleanitolList().remove(dlItem);
-                        model.getDownloadList().remove(dlItem);
-                        dlList.remove(dlItem);
-                    }
+                service.setOnSucceeded(workerStateEvent -> {
+                    count[0]++;
+                    model.setProgress(count[0]/count[1]);
+                    model.setAttentionColor(Color.GREEN);
+                    model.setAttentionText(dlItem.getName() + " has been downloaded successfully..");
+                    model.getCleanitolList().remove(dlItem);
+                    model.getDownloadList().remove(dlItem);
+                    dlList.remove(dlItem);
                 });
 
-                service.setOnFailed(new EventHandler<WorkerStateEvent>() {
-                    @Override
-                    public void handle(WorkerStateEvent workerStateEvent) {
-                        count[0]++;
-                        model.setProgress(count[0]/count[1]);
-                        model.setAttentionColor(Color.RED);
-                        model.setAttentionText("Downloading " + dlItem.getName() + " failed..");
-                    }
+                service.setOnFailed(workerStateEvent -> {
+                    count[0]++;
+                    model.setProgress(count[0]/count[1]);
+                    model.setAttentionColor(Color.RED);
+                    model.setAttentionText("Downloading " + dlItem.getName() + " failed..");
                 });
 
                 service.start();

@@ -51,10 +51,10 @@ public class Controller {
     private TableColumn<DownloadListInfo, Boolean> checkColumn;
 
     public void initialize() {
-        nameColumn.setCellValueFactory(new PropertyValueFactory<DownloadListInfo, String>("name"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<DownloadListInfo, String>("author"));
-        versionColumn.setCellValueFactory(new PropertyValueFactory<DownloadListInfo, String>("version"));
-        checkColumn.setCellValueFactory(new PropertyValueFactory<DownloadListInfo, Boolean>("check"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+        versionColumn.setCellValueFactory(new PropertyValueFactory<>("version"));
+        checkColumn.setCellValueFactory(new PropertyValueFactory<>("check"));
 
         checkColumn.setCellFactory(new Callback<TableColumn<DownloadListInfo, Boolean>, TableCell<DownloadListInfo, Boolean>>() {
             @Override
@@ -70,11 +70,8 @@ public class Controller {
                             CheckBox checkBox = new CheckBox();
                             if (info.getId() > 0) {
                                 checkBox.selectedProperty().bindBidirectional(info.checkProperty());
-                                checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                                    @Override
-                                    public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
-                                        info.checkProperty().setValue(newVal);
-                                    }
+                                checkBox.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
+                                    info.checkProperty().setValue(newVal);
                                 });
                                 setDisable(false);
                             } else {
@@ -88,6 +85,6 @@ public class Controller {
                 return cell;
             }
         });
-        nameColumn.setCellFactory(new DoubleClickableLotCellFactory<DownloadListInfo, String>());
+        nameColumn.setCellFactory(new DoubleClickableLotCellFactory<>());
     }
 }

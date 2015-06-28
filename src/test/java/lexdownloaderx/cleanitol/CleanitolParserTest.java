@@ -16,7 +16,7 @@ public class CleanitolParserTest {
 
     @Before
     public void setUp() throws Exception {
-        filePath = FileSystems.getDefault().getPath("C:", "DependencyCollector_Aalesund Complex.txt");
+        filePath = FileSystems.getDefault().getPath(getClass().getClassLoader().getResource("DependencyCollector_AalesundComplex.txt").getPath());
     }
 
     @Test

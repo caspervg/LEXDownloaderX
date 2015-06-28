@@ -10,6 +10,8 @@ import lexdownloaderx.bean.DownloadListInfo;
 import lexdownloaderx.bean.LEXDownloadListInfo;
 import net.caspervg.lex4j.bean.DownloadListItem;
 
+import java.util.stream.Collectors;
+
 /**
  * Table containing the download list elements
  */
@@ -37,9 +39,7 @@ public class LEXDownloadListTableView extends TableView<DownloadListInfo> implem
                 LEXDownloadListInfo info = new LEXDownloadListInfo(lot.getId(), lot.getName(), lot.getAuthor(), lot.getVersion(), lot.getUpdated());
                 list.add(info);
             }
-            for (DownloadListInfo info : model.getCleanitolList()) {
-                list.add(info);
-            }
+            list.addAll(model.getCleanitolList().stream().collect(Collectors.toList()));
         }
     }
 

@@ -46,17 +46,14 @@ public class CleanitolButton extends Button implements EventHandler<ActionEvent>
                     if (item.getId() > 0) {
                         LotService service = new LotService();
                         service.setId(item.getId());
-                        service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                            @Override
-                            public void handle(WorkerStateEvent workerStateEvent) {
-                                Lot lot = (Lot) workerStateEvent.getSource().getValue();
-                                model.getCleanitolList().add(new LEXDownloadListInfo(lot.getId(),
-                                        lot.getName(),
-                                        lot.getAuthor(),
-                                        lot.getVersion(),
-                                        lot.getUpdated()));
-                                model.setProgress(++numDone[0] / (double) numItems);
-                            }
+                        service.setOnSucceeded(workerStateEvent -> {
+                            Lot lot = (Lot) workerStateEvent.getSource().getValue();
+                            model.getCleanitolList().add(new LEXDownloadListInfo(lot.getId(),
+                                    lot.getName(),
+                                    lot.getAuthor(),
+                                    lot.getVersion(),
+                                    lot.getUpdated()));
+                            model.setProgress(++numDone[0] / (double) numItems);
                         });
                         service.start();
                     } else {

@@ -1,0 +1,20 @@
+Tromsdalen Church-0x5ad0e817_0xf33fb8ac_0x280000.SC4Model;http://www.simtropolis.com/stex/details.cfm?id=18221
+HospitalAnubis-0x5ad0e817_0xd258f797_0x690000.SC4Model;http://www.simtropolis.com/stex/details.cfm?id=18301
+Blue Lake College-0x5ad0e817_0xd258f797_0x3d0000.SC4Model;http://www.simtropolis.com/stex/details.cfm?id=17541
+P9 - Aalesund Hospital.dat;http://www.simtropolis.com/stex/details.cfm?id=15590
+NDEX_DT_ParkGarage6x6.SC4Model;http://www.simtropolis.com/stex/details.cfm?id=15455
+Shmails1x6GarageBlue-0x5ad0e817_0x93091c28_0x30000.SC4Model;http://www.simtropolis.com/stex/details.cfm?id=17894
+Shmails1x6ParkHereBlue103-0x5ad0e817_0x7308aae9_0x30000.SC4Model;http://www.simtropolis.com/stex/details.cfm?id=17894
+
+BSC MEGA Props - SG Vol 01.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=746
+BSC MEGA Props - JES Vol01.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=342
+BSC MEGA Props - RT Vol02.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=228
+BSC MEGA Props - Misc Vol02.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=1771
+BSC MEGA Props - CP Vol01.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=1180
+BSC MEGA Props - DAE Vol01.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=475
+BSC_Park_BaseSet_commonfiles.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=437
+BSC_TexturePack_Cycledogg_V 01.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=101
+BSC Textures Vol 01.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=90
+BSC Textures Vol 02.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=638
+BSC Textures Vol 03.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=1806
+CAS Essentials.dat;http://sc4devotion.com/csxlex/lex_filedesc.php?lotGET=2324

@@ -57,42 +57,33 @@ public class LEXLoginButton extends Button implements EventHandler<ActionEvent> 
 
         UserLoginService userLoginService = new UserLoginService();
         userLoginService.setAuth(auth);
-        userLoginService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent t) {
-                final User user = (User) t.getSource().getValue();
-                model.setUser(user);
+        userLoginService.setOnSucceeded(t -> {
+            final User user = (User) t.getSource().getValue();
+            model.setUser(user);
 
-                DownloadListService downloadListService = new DownloadListService();
-                downloadListService.setAuth(auth);
-                downloadListService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                    @Override
-                    public void handle(WorkerStateEvent t) {
-                        List<DownloadListItem> list = (List<DownloadListItem>) t.getSource().getValue();
-                        model.setDownloadList(new HashSet<>(list));
-                        model.setProgress(1.0);
-                        model.setAttentionColor(Color.GREEN);
-                        if (list.size() < 1) {
-                            // There are no files to download!
-                            model.setAttentionText(String.format("Welcome, %s. You have no files that are queued for downloading.", user.getUsername()));
-                        } else {
-                            // There are some files that the user could download
-                            model.setAttentionText(String.format("Welcome, %s. Please select the files you want to download.", user.getUsername()));
-                        }
-                    }
-                });
+            DownloadListService downloadListService = new DownloadListService();
+            downloadListService.setAuth(auth);
+            downloadListService.setOnSucceeded(t1 -> {
+                List<DownloadListItem> list = (List<DownloadListItem>) t1.getSource().getValue();
+                model.setDownloadList(new HashSet<>(list));
+                model.setProgress(1.0);
+                model.setAttentionColor(Color.GREEN);
+                if (list.size() < 1) {
+                    // There are no files to download!
+                    model.setAttentionText(String.format("Welcome, %s. You have no files that are queued for downloading.", user.getUsername()));
+                } else {
+                    // There are some files that the user could download
+                    model.setAttentionText(String.format("Welcome, %s. Please select the files you want to download.", user.getUsername()));
+                }
+            });
 
-                downloadListService.start();
-            }
+            downloadListService.start();
         });
 
-        userLoginService.setOnFailed(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent t) {
-                model.setAttentionColor(Color.RED);
-                model.setAttentionText("Sorry, your username or password was incorrect. Please try again!");
-                model.setProgress(0);
-            }
+        userLoginService.setOnFailed(t -> {
+            model.setAttentionColor(Color.RED);
+            model.setAttentionText("Sorry, your username or password was incorrect. Please try again!");
+            model.setProgress(0);
         });
 
         userLoginService.start();
