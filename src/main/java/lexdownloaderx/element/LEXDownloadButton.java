@@ -33,6 +33,7 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import lexdownloaderx.Controller;
 import lexdownloaderx.LEXDownloaderModel;
+import lexdownloaderx.Main;
 import lexdownloaderx.bean.DownloadListInfo;
 import lexdownloaderx.service.LotDownloadService;
 import net.caspervg.lex4j.auth.Auth;
@@ -57,7 +58,7 @@ public class LEXDownloadButton extends Button implements EventHandler<ActionEven
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        final List<DownloadListInfo> dlList = Controller.tableView.getItems();
+        final List<DownloadListInfo> dlList = Main.getController().tableView.getItems();
         final double[] count = {0,0};
         File dir = model.getDirectory();
         model.setProgress(-1);

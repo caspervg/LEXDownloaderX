@@ -40,7 +40,7 @@ import lexdownloaderx.core.DoubleClickableLotCellFactory;
 public class Controller {
 
     @FXML
-    public static TableView<DownloadListInfo> tableView;
+    public TableView<DownloadListInfo> tableView;
     @FXML
     private TableColumn<DownloadListInfo, String> nameColumn;
     @FXML
@@ -89,7 +89,5 @@ public class Controller {
             }
         });
         nameColumn.setCellFactory(new DoubleClickableLotCellFactory<DownloadListInfo, String>());
-
-
     }
 }

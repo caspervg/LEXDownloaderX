@@ -35,12 +35,15 @@ import java.util.Properties;
 public class Main extends Application {
 
     private Properties prop = new Properties();
+    private static Controller controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         prop.load(this.getClass().getClassLoader().getResourceAsStream("lex4j.properties"));
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LEXDownloaderX.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("LEXDownloaderX.fxml"));
+        Parent root = loader.load();
+        controller = loader.getController();
         Scene scene = new Scene(root, 650, 325);
         primaryStage.setTitle("LEX Downloader X - v" + prop.getProperty("lex4j.version") + " - by CasperVg");
         primaryStage.setScene(scene);
@@ -48,6 +51,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+
+    public static Controller getController() {
+        return controller;
+    }
 
     public static void main(String[] args) {
         launch(args);
